@@ -55735,21 +55735,34 @@ const Pue = /* @__PURE__ */ LP({
     graphOptions: {},
     resource_path: {}
   },
-  setup(r) {
-    const e = r, t = NP();
+  emits: ["graph-event"],
+  setup(r, { expose: e, emit: t }) {
+    const n = r, a = t;
+    e({
+      onEvent: (s, u) => {
+        console.log("onEvent", s, u), o && o.on(s, (f) => {
+          let l = {};
+          u.length > 0 ? u.forEach((c) => {
+            l[c] = f[c];
+          }) : l = f, console.log("graph event", s, l), a("graph-event", { eventName: s, data: l });
+        });
+      }
+    });
+    const i = NP();
+    let o;
     return PP(async () => {
-      if (!t.value)
+      if (!i.value)
         return;
-      const n = t.value, a = n.clientWidth, i = n.clientHeight, o = new ZD({
-        ...e.graphOptions,
-        container: n,
-        width: a,
-        height: i
-      });
-      o.data(e.data), o.render();
-    }), (n, a) => (kP(), RP("div", {
+      const s = i.value, u = s.clientWidth, f = s.clientHeight;
+      o = new ZD({
+        ...n.graphOptions,
+        container: s,
+        width: u,
+        height: f
+      }), o.data(n.data), o.render();
+    }), (s, u) => (kP(), RP("div", {
       ref_key: "containerRef",
-      ref: t,
+      ref: i,
       class: "nicegui-g6-container"
     }, null, 512));
   }
@@ -55758,7 +55771,7 @@ const Pue = /* @__PURE__ */ LP({
   for (const [n, a] of e)
     t[n] = a;
   return t;
-}, Bue = /* @__PURE__ */ kue(Pue, [["__scopeId", "data-v-92a3571a"]]);
+}, Bue = /* @__PURE__ */ kue(Pue, [["__scopeId", "data-v-9e6e0fad"]]);
 export {
   Bue as default
 };
