@@ -1,4 +1,5 @@
-from typing import Dict, Optional
+from pathlib import Path
+from typing import Dict, List, Optional
 from nicegui.element import Element
 
 
@@ -8,6 +9,10 @@ class G6(
 ):
     def __init__(
         self,
-        defaults: Optional[Dict] = None,
+        data: Dict,
+        options: Optional[Dict] = None,
     ) -> None:
         super().__init__()
+        self._props["data"] = data
+        self._props["graphOptions"] = options or {}
+        self.style("width: 100%; min-height: 16rem;")

@@ -43,7 +43,7 @@ def tran_vue_imports(js_file_name_without_ex: str):
         const_stms = "\n".join(each_const_stms) + "\n"
         # print(const_stms)
 
-        to_file = EX_REACTIVE_DIR_ROOT / 'g6.js'
+        to_file = DEST_ROOT / js_file_name
 
         with open(to_file, mode="w", encoding="utf8") as f:
             f.write(const_stms)
