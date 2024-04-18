@@ -55728,7 +55728,19 @@ Se(Nue, function(r, e) {
   IU(e, r);
 });
 B(B({}, G4), Y$);
-const Pue = /* @__PURE__ */ LP({
+function Pue(r) {
+  if (Array.isArray(r))
+    return (e) => {
+      let t = {};
+      return r.length > 0 ? r.forEach((n) => {
+        t[n] = e[n];
+      }) : t = e, t;
+    };
+  if (typeof r == "string")
+    return new Function("obj", `return (${r})(obj)`);
+  throw new Error("Invalid arguments for extractEventObject");
+}
+const kue = /* @__PURE__ */ LP({
   __name: "G6",
   props: {
     data: {},
@@ -55740,11 +55752,11 @@ const Pue = /* @__PURE__ */ LP({
     const n = r, a = t;
     e({
       onEvent: (s, u) => {
-        console.log("onEvent", s, u), o && o.on(s, (f) => {
-          let l = {};
-          u.length > 0 ? u.forEach((c) => {
-            l[c] = f[c];
-          }) : l = f, console.log("graph event", s, l), a("graph-event", { eventName: s, data: l });
+        console.log("onEvent", s, u);
+        let f = Pue(u);
+        o && o.on(s, (l) => {
+          const c = f(l);
+          console.log("graph event", s, c), a("graph-event", { eventName: s, data: c });
         });
       }
     });
@@ -55766,12 +55778,12 @@ const Pue = /* @__PURE__ */ LP({
       class: "nicegui-g6-container"
     }, null, 512));
   }
-}), kue = (r, e) => {
+}), Rue = (r, e) => {
   const t = r.__vccOpts || r;
   for (const [n, a] of e)
     t[n] = a;
   return t;
-}, Bue = /* @__PURE__ */ kue(Pue, [["__scopeId", "data-v-9e6e0fad"]]);
+}, Fue = /* @__PURE__ */ Rue(kue, [["__scopeId", "data-v-46965fe2"]]);
 export {
-  Bue as default
+  Fue as default
 };

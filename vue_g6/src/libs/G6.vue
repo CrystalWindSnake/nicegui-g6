@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { Graph, GraphData, TreeGraphData, type GraphOptions } from "@antv/g6";
+import { getExtractEventObjectFn } from "./core";
 
 type TData = GraphData | TreeGraphData | undefined;
 
@@ -18,19 +19,14 @@ const emits = defineEmits<{
 
 // expose
 defineExpose({
-  onEvent: (eventName: string, args: string[]) => {
+  onEvent: (eventName: string, args: string[] | string) => {
     console.log("onEvent", eventName, args);
+
+    let argsMapFn = getExtractEventObjectFn(args);
 
     if (graph) {
       graph.on(eventName, (ev) => {
-        let extractedValues = {} as any;
-        if (args.length > 0) {
-          args.forEach((key) => {
-            extractedValues[key] = ev[key];
-          });
-        } else {
-          extractedValues = ev;
-        }
+        const extractedValues = argsMapFn(ev);
 
         console.log("graph event", eventName, extractedValues);
         emits("graph-event", { eventName, data: extractedValues });

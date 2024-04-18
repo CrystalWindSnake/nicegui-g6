@@ -1,4 +1,4 @@
-from typing import Callable, Dict, List, Optional
+from typing import Callable, Dict, List, Optional, Union
 from nicegui.element import Element
 from nicegui import context as ng_context, Client as ng_client
 
@@ -31,12 +31,46 @@ class G6(
         self.on("graph-event", on_graph_event)
 
     def on_graph_event(
-        self, event: str, callback: Callable[..., None], args: List[str] = []
+        self,
+        event: str,
+        callback: Callable[..., None],
+        args: Union[List[str], str, None] = None,
     ):
+        """
+        Register a callback for a graph event.
+
+        [G6 Event Reference](https://g6.antv.vision/en/api/event)
+
+        Args:
+            event (str): event name
+            callback (Callable[..., None]): callback function
+            args (Union[List[str], str, None], optional): event arguments. Defaults to None.
+
+        Example:
+            The parameter `args` can be a list of strings.
+
+            ```python
+            def on_node_click(data):
+                print(data)
+
+            g6().on_graph_event("node:click", on_node_click, ["item"])
+            ```
+
+            The parameter `args` can be a string, in which case it acts as a JavaScript function used to extract event data.
+            ```python
+            def on_graph_event(data):
+                print(data)
+
+            g6().on_graph_event("node:mouseenter", on_graph_event, r"e=>({data:e.item._cfg.id})")
+            ```
+
+
+        """
+
         @self.__deferred_task.register
         def _():
             self._event_listener_map[event] = callback
-            self.run_method("onEvent", event, args)
+            self.run_method("onEvent", event, args or [])
 
 
 class DeferredTask:
