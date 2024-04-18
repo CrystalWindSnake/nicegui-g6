@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "nicegui-g6"
+version = "0.1.0"
+description = "A component of AntV G6 visualization engine implemented based on NiceGUI"
+authors = ["CrystalWindSnake <568166495@qq.com>"]
+readme = "README.md"
+license = "MIT"
+packages = [{include = "nicegui_g6"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.8"
+nicegui = "^1.4.22"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,15 @@
+version: '3'
+
+tasks:
+  test:
+    - cls
+    - pytest -v tests 
+
+  dist: 
+    - poetry build
+
+  # rel: 
+  #   - poetry publish
+
+  dev-ins: poetry install
+
