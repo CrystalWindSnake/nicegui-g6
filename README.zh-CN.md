@@ -3,29 +3,25 @@
 <b>nicegui-g6</b>
 </h1>
 
-
-A component of AntV [G6](https://github.com/antvis/g6) visualization engine implemented based on [NiceGUI](https://github.com/zauberzeug/nicegui)
-
+基于 AntV [G6](https://github.com/antvis/g6) 可视化引擎的一个 [NiceGUI](https://github.com/zauberzeug/nicegui) 组件 。
 
 
+## 🔨 开始
 
-
-## 🔨 Getting Started
-
-To install `nicegui-g6`, run the following command in your terminal:
+要安装 `nicegui-g6`，在终端中运行以下命令：
 
 ```bash
 pip install nicegui-g6
 ```
 
-To use `nicegui-g6`, you can simply import the `g6` function and pass the graph data to it. Here's an example:
+要使用 nicegui-g6，您只需导入 g6 函数并将图形数据传递给它。以下是一个示例：
 
 ```python
 from nicegui_g6 import g6
 from nicegui import ui
 
-# define the graph data
-# You can refer to the G6 documentation for more details.
+# 定义图形数据
+# 您可以参考 G6 文档了解更多细节。
 data = {
     "nodes": [
         {
