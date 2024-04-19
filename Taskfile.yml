@@ -8,8 +8,8 @@ tasks:
   dist: 
     - poetry build
 
-  # rel: 
-  #   - poetry publish
+  rel: 
+    - poetry publish
 
   dev-ins: poetry install
 
