@@ -9,6 +9,7 @@ tasks:
     - poetry build
 
   rel: 
+    - task: dist
     - poetry publish
 
   dev-ins: poetry install
