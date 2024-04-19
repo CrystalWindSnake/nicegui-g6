@@ -72,6 +72,8 @@ class G6(
             self._event_listener_map[event] = callback
             self.run_method("onEvent", event, args or [])
 
+        return self
+
 
 class DeferredTask:
     def __init__(self):
@@ -85,7 +87,9 @@ class DeferredTask:
             for task in self._tasks:
                 task()
 
-            client.connect_handlers.remove(on_client_connect)  # type: ignore
+            # Avoid events becoming ineffective due to page refresh when sharing the client.
+            if not client.shared:
+                client.connect_handlers.remove(on_client_connect)  # type: ignore
 
         ng_context.get_client().on_connect(on_client_connect)
 
